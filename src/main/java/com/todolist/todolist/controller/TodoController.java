@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,6 +44,20 @@ public class TodoController {
 								//thymeleaf dependency is added in pom it autoconfigures.
 		
 		//controller -> listtodoItem handler method -> model has a list of students -> displayed in view html(template)
+	}
+	
+	@GetMapping("/todo/new")
+	public String createTodoTask(Model model) {
+		TodoItem todoItem1 = new TodoItem();
+		model.addAttribute("TodoItem",todoItem1);
+		return "createTask";
+		
+	}
+	@PostMapping("/todoNew")
+	public String saveTask(@ModelAttribute("TodoItem") TodoItem todoItem) {
+		todoService.saveTodo(todoItem);
+		return "redirect:/todo";
+		
 	}
 	
 /*	@Autowired

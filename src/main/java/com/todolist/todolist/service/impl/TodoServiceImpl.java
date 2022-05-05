@@ -27,4 +27,11 @@ public class TodoServiceImpl implements TodoService{
 		return todoRepo.findAll();
 	}
 
+
+	@Override
+	public TodoItem saveTodo(TodoItem todoItem) {
+		
+		return todoRepo.save(todoItem);
+	}
+
 }

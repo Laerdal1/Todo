@@ -8,4 +8,5 @@ public interface TodoService {
 	
 	List<TodoItem> getAllTodoItems();	//List<Entity type>  list=> java.util
 	
+	TodoItem saveTodo(TodoItem todoItem);
 }
