@@ -21,11 +21,11 @@ public class TodolistApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		/*
-		 * TodoItem todoItem1 = new TodoItem("Nrp Testing","InProgress",true);
-		 * todoRepo.save(todoItem1);
-		 */ 
 		
+		/*
+		 * TodoItem todoItem1 = new TodoItem("Nrp Testing7","InProgress",true);
+		 * todoRepo.save(todoItem1);
+		 */
 	}
 
 	
