@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 //import org.apache.commons.lang3.StringUtils;
 
-import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "todo")
@@ -25,9 +24,20 @@ public class TodoItem {
 	private boolean done;
 	
 	public TodoItem() {
-		super();
+		
 	}
-	
+
+	public TodoItem(String task, String status, boolean done) {
+		super();
+		this.task = task;
+		this.status = status;
+		this.done = done;
+	}
+
+
+
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
@@ -51,7 +61,6 @@ public class TodoItem {
 		this.status = status;
 	}
 	
-	@Column(nullable = false)
 	public String getTask() {
 		return task;
 	}

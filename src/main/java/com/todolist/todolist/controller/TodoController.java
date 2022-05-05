@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +18,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.todolist.todolist.model.TodoItem;
 import com.todolist.todolist.repository.TodoRepo;
+import com.todolist.todolist.service.TodoService;
 
 
-@RestController
-@RequestMapping(value = "/todo")
+//@RestController
+@Controller
+//@RequestMapping(value = "/todo")
 public class TodoController {
 	
-	@Autowired
+	private TodoService todoService;
+
+	public TodoController(TodoService todoService) {
+		super();
+		this.todoService = todoService;
+	}
+	
+	//handler method to handle list TodoItems and return mode and view.
+
+	@GetMapping("/todo")
+	public String listTodoItems(Model model) {
+		model.addAttribute("TodoItem", todoService.getAllTodoItems());
+		return "todoItem";		//todoItems view      view is coded under resources-> template -> todoItems.html
+								//view resolver is auto configured in springboot for thymeleaF
+								//thymeleaf dependency is added in pom it autoconfigures.
+		
+		//controller -> listtodoItem handler method -> model has a list of students -> displayed in view html(template)
+	}
+	
+/*	@Autowired
 	private TodoRepo todoRepo;
 	
 	@GetMapping
@@ -49,4 +72,5 @@ public class TodoController {
 		
 		return todoRepo.findAll();
 	}
+	*/
 }
