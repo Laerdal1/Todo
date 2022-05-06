@@ -36,8 +36,6 @@ public class TodoItem {
 
 
 
-
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {

@@ -1,8 +1,11 @@
 package com.todolist.todolist.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,14 +63,54 @@ public class TodoController {
 		
 	}
 	
-/*	@Autowired
-	private TodoRepo todoRepo;
-	
-	@GetMapping
-	public List<TodoItem> findAll(){
-		return todoRepo.findAll();
+	@GetMapping("/todo/edit/{id}")
+	public String editTask(@PathVariable Long id, Model model) {
+		model.addAttribute("TodoItem", todoService.getTaskById(id));
+		return "editTask";
 		
 	}
+	@PostMapping("/todoUpdate/{id}" )
+	public String updateTask(@PathVariable Long id , @ModelAttribute("todoItem") TodoItem todoItem,  Model Model) {
+		
+		//get task from database by id
+		Optional <TodoItem> id1 = todoService.getTaskById(id);
+		TodoItem existingTodoItem = id1.get();
+		System.out.println("Testing"+existingTodoItem);
+		
+		existingTodoItem.setId(id);
+		existingTodoItem.setTask(todoItem.getTask());
+		existingTodoItem.setStatus(todoItem.getStatus());
+		existingTodoItem.setDone(todoItem.isDone());
+		
+		//save updated student object
+		todoService.UpdateTask(existingTodoItem);
+		
+		return "redirect:/todo";
+		
+	}
+	
+	
+	
+	@GetMapping("/todo/{id}") //handler method for deleting task
+	public String deleteTask(@PathVariable Long id) {
+		
+		todoService.deleteTaskById(id);
+		
+		return "redirect:/todo";
+		
+		
+	}
+	
+	@Autowired
+	private TodoRepo todoRepo;
+	
+	@GetMapping(value ="/todo1", produces= MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> findAll(){
+		
+		 todoService.getAllTodoItems();
+		return ResponseEntity.ok().body("Todo");
+	}
+/*	
 	
 	@PostMapping
 	public TodoItem save(@Validated @NonNull @RequestBody TodoItem todoItem) {

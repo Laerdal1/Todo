@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ToDo List</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<!--bootstap css class container  -->
+
+	<div class="container">
+
+		<div class="row">
+			<div class=col-lg-6 col-md-6 col-sm-6 container
+				justify-content-center card>
+				<h1 class="text-center">Update Task</h1>
+
+				<div class="card-body">
+				
+					<form th:action="@{/todoUpdate/{id} (id=${TodoItem.id})}" th:object="${TodoItem}" method="POST">
+
+						<div class="form-group">
+
+							<label>Update Task Name </label> <input type="text" 
+							name="TaskName"
+								th:field="*{task}" class="form-control"
+								placeholder="Update Task Name" />
+						</div>
+						
+							<div class="form-group">
+
+							<label> Task Status </label> <input type="text" 
+							name="TaskName"
+								th:field="*{status}" class="form-control"
+								placeholder="Update Task Status" />
+						</div>
+						
+						<div class="form-group">
+
+							<label> Done </label> <input type="text" 
+							name="TaskName"
+								th:field="*{done}" class="form-control"
+								placeholder="true/false" />
+						</div>
+						
+						<div class = "box-footer">
+							<button type = "submit" class = "btn btn-primary">
+							Submit
+							</button>
+						
+						 </div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

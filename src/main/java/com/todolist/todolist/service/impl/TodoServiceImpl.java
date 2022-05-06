@@ -34,4 +34,27 @@ public class TodoServiceImpl implements TodoService{
 		return todoRepo.save(todoItem);
 	}
 
+
+	@Override
+	public TodoItem getTaskById(Long id) {
+		
+		return todoRepo.findById(id).get();
+	}
+
+
+	@Override
+	public TodoItem UpdateTask(TodoItem todoItem) {
+		
+		return todoRepo.save(todoItem);
+	}
+
+
+	@Override
+	public void deleteTaskById(Long id) {
+		todoRepo.deleteById(id);
+	}
+
+
+	
+
 }
