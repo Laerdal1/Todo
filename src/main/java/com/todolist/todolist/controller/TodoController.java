@@ -73,8 +73,8 @@ public class TodoController {
 	public String updateTask(@PathVariable Long id , @ModelAttribute("todoItem") TodoItem todoItem,  Model Model) {
 		
 		//get task from database by id
-		Optional <TodoItem> id1 = todoService.getTaskById(id);
-		TodoItem existingTodoItem = id1.get();
+		TodoItem existingTodoItem = todoService.getTaskById(id);
+		//TodoItem existingTodoItem = id1.get();
 		System.out.println("Testing"+existingTodoItem);
 		
 		existingTodoItem.setId(id);
